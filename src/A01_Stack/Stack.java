@@ -12,8 +12,11 @@ public class Stack<T>
      * @throws StackEmptyException 
      */
     public T pop() throws StackEmptyException {
-
-    	return null;
+		if (first == null)
+			throw new StackEmptyException();
+		Node<T> top = first;
+		first = top.getNext();
+    	return top.getData();
     }
     
     /**
@@ -21,14 +24,19 @@ public class Stack<T>
      * @param i data
      */
     public void push(T i) {
-
+		Node<T> top = new Node<>(i);
+		top.setNext(first);
+		first = top;
     }
     
     /**
      * Liefert die Anzahl der Elemente im Stack
-     * @return
+     * @return size of stack
      */
     public int getCount() {
-    	return 0;
+		int n = 0;
+    	for (Node<T> cur = first; cur != null; cur = cur.getNext())
+			n++;
+		return n;
     }
 }
