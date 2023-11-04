@@ -2,6 +2,8 @@ package A02_Queue;
 
 public class Queue<T>
 {
+    // Markus Stoff
+
     private Node<T> first;
     
     private Node<T> last;

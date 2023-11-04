@@ -3,6 +3,8 @@ package A01_Stack;
 
 public class Stack<T>
 {
+	// Markus Stoff
+
 	 private Node<T> first;
     /**
      * Oberstes Element entfernen und zurückliefern.

@@ -1,3 +1,8 @@
+/**
+ * Author: Markus Stoff
+ * Date: 2023-11-04
+ */
+
 package A02_Queue;
 
 public class Node<T>
