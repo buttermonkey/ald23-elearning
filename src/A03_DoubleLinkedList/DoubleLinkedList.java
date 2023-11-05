@@ -7,7 +7,7 @@ public class DoubleLinkedList<T>
     Node<T> current;
 
     /**
-     * Einfügen einer neuen <T>
+     * Anhängen einer neuen <T>
      * @param a <T>
      */
     public void add(T a) {
