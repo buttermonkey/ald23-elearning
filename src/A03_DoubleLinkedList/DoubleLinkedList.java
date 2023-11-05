@@ -136,6 +136,19 @@ public class DoubleLinkedList<T>
         removeNode(nodeToRemove);
     }
 
+    /**
+     * Entfernt das aktuelle Element.
+     * Als neues aktuelles Element wird der Nachfolger gesetzt oder
+     * (falls kein Nachfolger) das vorhergehende Element
+     * @throws CurrentNotSetException Es ist kein aktuelles Element gesetzt
+     */
+    public void removeCurrent() throws CurrentNotSetException {
+        if (current == null)
+            throw new CurrentNotSetException();
+        removeNode(current);
+        current = current.getNext() != null ? current.getNext() : current.getPrevious();
+    }
+
     private void removeNode(Node<T> node) {
         if (node == null)
             return;
@@ -148,19 +161,6 @@ public class DoubleLinkedList<T>
             node.getNext().setPrevious(node.getPrevious());
         else
             last = node.getPrevious();
-    }
-
-    /**
-     * Entfernt das aktuelle Element.
-     * Als neues aktuelles Element wird der Nachfolger gesetzt oder
-     * (falls kein Nachfolger) das vorhergehende Element
-     * @throws CurrentNotSetException Es ist kein aktuelles Element gesetzt
-     */
-    public void removeCurrent() throws CurrentNotSetException {
-        if (current == null)
-            throw new CurrentNotSetException();
-        removeNode(current);
-        current = current.getNext() != null ? current.getNext() : current.getPrevious();
     }
 
     /**
