@@ -96,7 +96,7 @@ public class DoubleLinkedList<T>
     /**
      * Retourniert aktuelle (current) <T>, ohne Zeiger zu ändern
      * @return <T>
-     * @throws CurrentNotSetException
+     * @throws CurrentNotSetException Es ist kein aktuelles Element gesetzt
      */
     public T getCurrent() throws CurrentNotSetException {
         if (current == null)
@@ -127,45 +127,46 @@ public class DoubleLinkedList<T>
     /**
      * Entfernen des Elements an der angegebenen Position.
      * Falls das entfernte Element das aktuelle Element ist, wird current auf null gesetzt.
-     * @param pos
+     * @param pos Position, Nummerierung startet mit 1
      */
     public void remove(int pos) {
-        removeNode(getNode(pos));
+        Node<T> nodeToRemove = getNode(pos);
+        if (current == nodeToRemove)
+            current = null;
+        removeNode(nodeToRemove);
     }
 
     private void removeNode(Node<T> node) {
-        if (node != null) {
-            if (node == current)
-                current = null;
-            if (node.getPrevious() != null)
-                node.getPrevious().setNext(node.getNext());
-            else
-                first = node.getNext();
-            if (node.getNext() != null)
-                node.getNext().setPrevious(node.getPrevious());
-            else
-                last = node.getPrevious();
-        }
+        if (node == null)
+            return;
+
+        if (node.getPrevious() != null)
+            node.getPrevious().setNext(node.getNext());
+        else
+            first = node.getNext();
+        if (node.getNext() != null)
+            node.getNext().setPrevious(node.getPrevious());
+        else
+            last = node.getPrevious();
     }
 
     /**
      * Entfernt das aktuelle Element.
      * Als neues aktuelles Element wird der Nachfolger gesetzt oder
-     * (falls kein Nachfolger) das vorhergehende Element 
-     * @throws CurrentNotSetException
+     * (falls kein Nachfolger) das vorhergehende Element
+     * @throws CurrentNotSetException Es ist kein aktuelles Element gesetzt
      */
     public void removeCurrent() throws CurrentNotSetException {
         if (current == null)
             throw new CurrentNotSetException();
-        Node<T> newCurrent = current.getNext() != null ? current.getNext() : current.getPrevious();
         removeNode(current);
-        current = newCurrent;
+        current = current.getNext() != null ? current.getNext() : current.getPrevious();
     }
-    
+
     /**
      * Die Methode fügt die übergebene <T> nach der aktuellen (current) ein
      * und setzt dann die neu eingefügte <T> als aktuelle (current) <T>.
-     * @throws CurrentNotSetException 
+     * @throws CurrentNotSetException Es ist kein aktuelles Element gesetzt
      */
     public void insertAfterCurrentAndMove(T a) throws CurrentNotSetException {
         if (current == null)
