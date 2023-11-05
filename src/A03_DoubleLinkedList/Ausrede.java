@@ -1,6 +1,6 @@
 /**
  * Author: Markus Stoff
- * Date: 2023-11-04
+ * Date: 2023-11-05
  */
 
 package A03_DoubleLinkedList;
